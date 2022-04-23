@@ -17,7 +17,12 @@ class Sbb2ApplicationTests {
 	private QuestionRepository questionRepository;
 
 	@Test
+	void testFindBySubject() {
+		Question q = questionRepository.findBySubject("sbb가 무엇인가요?");
+		assertEquals(q.getId(), 1);
+	}
 
+	@Test
 	void testFindById() {
 		Optional<Question> oq = questionRepository.findById(1);
 
