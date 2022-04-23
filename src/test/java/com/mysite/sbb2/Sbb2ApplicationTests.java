@@ -9,12 +9,24 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 class Sbb2ApplicationTests {
 
 	@Autowired
 	private QuestionRepository questionRepository;
+
+
+	@Test
+	void testModifyQuestionSubject() {
+		Optional<Question> oq = questionRepository.findById(1);
+		assertTrue(oq.isPresent());
+
+		Question q = oq.get();
+		q.setSubject("수정된 제목");
+		questionRepository.save(q);
+	}
 
 	@Test
 	void testFindBySubjectLike(){
