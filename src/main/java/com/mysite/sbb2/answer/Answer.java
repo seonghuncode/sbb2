@@ -1,5 +1,7 @@
-package com.mysite.sbb2;
+package com.mysite.sbb2.answer;
 
+
+import com.mysite.sbb2.question.Question;
 import lombok.Getter;
 import lombok.Setter;
 
