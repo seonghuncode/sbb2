@@ -11,11 +11,11 @@ import java.util.List;
 public class QuestionConreoller {
 
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionService questionService;
 
     @RequestMapping("/question/list")
     public String list(Model model) {
-        List<Question> questionList = questionRepository.findAll();
+        List<Question> questionList = questionService.getList();
         model.addAttribute("questionList", questionList);
 
         return "question_list";
