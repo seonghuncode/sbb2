@@ -17,6 +17,15 @@ class Sbb2ApplicationTests {
 	private QuestionRepository questionRepository;
 
 	@Test
+	void testFindBySubjectLike(){
+		//(자바 문법상 .this는 생략해도 무방하다.)
+		//복수형으로 받기 위해 List로 받는다
+		List<Question> qlist = this.questionRepository.findBySubjectLike("sbb%"); //sbb% ==> sbb로 시작하는 문자열
+		Question q = qlist.get(0);
+		assertEquals("sbb가 무엇인가요?", q.getSubject());
+	}
+
+	@Test
 	void testFindBySubjectAndContent() {
 		Question q = questionRepository.findBySubjectAndContent("sbb가 무엇인가요?", "sbb에 대해서 알고 싶습니다.");
 		assertEquals(q.getId(), 1);

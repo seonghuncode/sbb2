@@ -2,12 +2,16 @@ package com.mysite.sbb2;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
+
 //Question하나당 하나의 리포지 터리를 갖게 돠는 역할>>
 public  interface QuestionRepository extends JpaRepository<Question, Integer> {
 
     Question findBySubject(String subject);
 
     Question findBySubjectAndContent(String subject, String content);
+
+    List<Question> findBySubjectLike(String subject);
 
     //Integer : QuestionRepository dml idrj integer이기 땨문에 같데 해준는 것이 암묵적인 약속이다.
 
