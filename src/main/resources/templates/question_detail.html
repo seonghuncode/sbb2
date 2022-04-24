@@ -1,2 +1,18 @@
 <h1 th:text="${question.subject}"></h1>
 <div th:text="${question.content}"></div>
+
+<h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
+<div>
+    <ul>
+        <li th:each="answer : ${question.answerList}" th:text="${answer.content}"></li>
+    </ul>
+</div>
+
+<!--몇번 질문에 대한 답변인지 왜 th문법을 사용앴는가??/ 등록,수정,삭제 => post로 보내는게 관례(주소에 내용이 남지 않는다) -->
+<form th:action="@{|/answer/create/${question.id}|}" method="post">
+    <textarea required placeholder="답변내용을 등록해주세요." name="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
+
+<!-- rows == 줄수 -->
+
