@@ -16,3 +16,15 @@ CREATE TABLE answer (
   question_id BIGINT UNSIGNED NOT NULL,
   content TEXT NOT NULL
 );
+
+#2-11 답변등록, db.sql에서 테스트용 질문 2개 생성
+
+INSERT INTO question
+SET create_date = NOW(),
+`subject` = 'sbb가 무엇인가요?',
+content = 'sbb에 대해서 알고 싶습니다.';
+
+INSERT INTO question
+SET create_date = NOW(),
+`subject` = '스프링부트 모델 질문입니다.',
+content = 'id는 자동으로 생성되나요?';
