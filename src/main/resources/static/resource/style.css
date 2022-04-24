@@ -13,13 +13,5 @@ html > body select,
 html > body input {
     font-family: "GmarketSansMedium";
     text-underline-position: under;
-}
 
-
-textarea {
-    width:100%;
-}
-
-input[type=submit] {
-    margin-top:10px;
 }
