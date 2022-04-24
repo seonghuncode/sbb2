@@ -1,6 +1,7 @@
 <h1 th:text="${question.subject}"></h1>
 <div th:text="${question.content}"></div>
 
+<h1>답변 리스트</h1>
 <h5 th:text="|${#lists.size(question.answerList)}개의 답변이 있습니다.|"></h5>
 <div>
     <ul>

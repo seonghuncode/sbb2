@@ -25,7 +25,7 @@ public class QuestionConreoller {
 
     @RequestMapping(value = "/detail/{id}")
     public String detail(Model model, @PathVariable("id") Integer id) {
-        Question question = questionService.getQuestion(id);
+        Question question = questionService.getQuestion(id); // 질문을 가지고 온다
 
         model.addAttribute("question", question);
 
