@@ -21,9 +21,7 @@
     </div>
 
     <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="POST" class="my-3">
-        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
-            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
-        </div>
+        <div th:replace="form_errors::formErrorsFragment"></div>
 
         <textarea th:field="*{content}" placeholder="답변내용을 등록해주세요." name="content" rows="10"
                   class="form-control"></textarea>
