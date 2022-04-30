@@ -1,5 +1,6 @@
 package com.mysite.sbb2.question;
 
+import com.mysite.sbb2.answer.AnswerForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +29,7 @@ public class QuestionConreoller {
     }
 
     @RequestMapping(value = "/detail/{id}")
-    public String detail(Model model, @PathVariable("id") Integer id) {
+    public String detail(Model model, @PathVariable("id") Integer id, AnswerForm answerForm) {
         Question question = questionService.getQuestion(id); // 질문을 가지고 온다
 
         model.addAttribute("question", question);

@@ -20,8 +20,13 @@
         </div>
     </div>
 
-    <form th:action="@{|/answer/create/${question.id}|}" method="POST" class="my-3">
-        <textarea required placeholder="답변내용을 등록해주세요." name="content" rows="10" class="form-control"></textarea>
+    <form th:action="@{|/answer/create/${question.id}|}" th:object="${answerForm}" method="POST" class="my-3">
+        <div class="alert alert-danger" role="alert" th:if="${#fields.hasAnyErrors()}">
+            <div th:each="err : ${#fields.allErrors()}" th:text="${err}"></div>
+        </div>
+
+        <textarea th:field="*{content}" placeholder="답변내용을 등록해주세요." name="content" rows="10"
+                  class="form-control"></textarea>
         <input type="submit" value="작성" class="btn btn-primary my-2">
     </form>
 </div>

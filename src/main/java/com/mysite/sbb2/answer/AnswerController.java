@@ -5,10 +5,12 @@ import com.mysite.sbb2.question.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import javax.validation.Valid;
 
 @RequestMapping("/answer")
 @Controller
@@ -19,16 +21,21 @@ public class AnswerController {
     @Autowired
     private AnswerService answerService;
 
-    @PostMapping(value = "/create/{id}")
-    public String createAnswer (Model model, @PathVariable("id") Integer id, @RequestParam String content){
-// @RequestParam String content => 이전 폼에서 값이 들어온다
+    @PostMapping("/create/{id}")
+    public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult){
 
-
-        Question question = this.questionService.getQuestion(id);
-        answerService.create(question, content);   //이질문(왼쪽)에 이답변을(오른쪽) 달겠다는 의미
-         model.addAttribute("question", question);
+        Question question = questionService.getQuestion(id);
+        //만약에 들어온 데이터에 문제가 생겼다면
+        if(bindingResult.hasErrors()){
+            model.addAttribute("question", question);
+            return "question_detail"; //주소는 그대로 인데 이파일을 실행한다는 의미이다,
+        }
+        answerService.create(question, answerForm.getContent());
         return "redirect:/question/detail/%d".formatted(id);
-
     }
+
+
+
+
 
 }
