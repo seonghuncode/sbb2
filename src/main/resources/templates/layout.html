@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.min.js"></script>
     <!-- sbb CSS -->
     <link rel="stylesheet" type="text/css" th:href="@{/resource/style.css}">
     <title>Hello, sbb!</title>
 </head>
 <body>
+<nav th:replace="navbar::navbarFragment"></nav>
+<!-- 대체해라 navbarFragment이럿게 된 fragment를 찾아서햣  -->
 
 <!-- 기본 템플릿 안에 삽입될 내용 Start -->
 <th:block layout:fragment="content"></th:block>
