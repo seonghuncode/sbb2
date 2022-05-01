@@ -28,3 +28,10 @@ INSERT INTO question
 SET create_date = NOW(),
 `subject` = '스프링부트 모델 질문입니다.',
 content = 'id는 자동으로 생성되나요?';
+
+CREATE TABLE site_user (
+  id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  username CHAR(100) NOT NULL UNIQUE,
+  `password` CHAR(100) NOT NULL,
+  email CHAR(100) NOT NULL UNIQUE
+);
