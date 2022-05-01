@@ -1,6 +1,7 @@
 package com.mysite.sbb2.user;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +32,19 @@ public class UserController {
             return "signup_form";
         }
 
-        userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1());
+        try {
+            userService.create(userCreateForm.getUsername(), userCreateForm.getEmail(), userCreateForm.getPassword1());
+        } catch (DataIntegrityViolationException e) {
+            //오류 발생시 터미널에 오류 출력을 시켜준다(오류가 아니라 오류 종류를 알려주는 것이다)
+            //원하지 않으면 지우기
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", "이미 등록된 사용자입니다.");
+            return "signup_form";
+        } catch (Exception e) {
+            e.printStackTrace();
+            bindingResult.reject("signupFailed", e.getMessage());
+            return "signup_form";
+        }
 
         return "redirect:/";
     }
