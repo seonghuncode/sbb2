@@ -2,6 +2,9 @@ server:
   port: 8087
 
 spring:
+  thymeleaf:
+    cache: false
+    prefix: file:src/main/resources/templates/
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://localhost:3306/sbb_2nd?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
