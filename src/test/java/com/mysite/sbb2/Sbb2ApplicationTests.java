@@ -5,6 +5,7 @@ import com.mysite.sbb2.answer.AnswerRepository;
 import com.mysite.sbb2.question.Question;
 import com.mysite.sbb2.question.QuestionRepository;
 import com.mysite.sbb2.question.QuestionService;
+import com.mysite.sbb2.user.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,6 +26,18 @@ class Sbb2ApplicationTests {
 	private AnswerRepository answerRepository;
 	@Autowired
 	private QuestionService questionService;
+	@Autowired
+	private UserService userService;
+
+	@Test
+	void testCreateUser() {
+		for (int i = 1; i <= 10; i++) {
+			String username = "user%02d".formatted(i);
+			String email = "%s@test.com".formatted(username);
+			String password = "1234";
+			userService.create(username, email, password);
+		}
+	}
 
 
 	@Test
