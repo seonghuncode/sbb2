@@ -1,6 +1,8 @@
 package com.mysite.sbb2.question;
 
 import com.mysite.sbb2.answer.AnswerForm;
+import com.mysite.sbb2.user.SiteUser;
+import com.mysite.sbb2.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,8 @@ public class QuestionConreoller {
 
     @Autowired
     private QuestionService questionService;
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
@@ -46,7 +50,9 @@ public class QuestionConreoller {
             return "question_form";
         }
 
-        questionService.create(questionForm.getSubject(), questionForm.getContent());
+        SiteUser author = userService.getUser(2); // 임시
+
+        questionService.create(questionForm.getSubject(), questionForm.getContent(), author);
         return "redirect:/question/list"; // 질문 저장후 질문목록으로 이동
     }
 

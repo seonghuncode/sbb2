@@ -2,6 +2,8 @@ package com.mysite.sbb2.answer;
 
 import com.mysite.sbb2.question.Question;
 import com.mysite.sbb2.question.QuestionService;
+import com.mysite.sbb2.user.SiteUser;
+import com.mysite.sbb2.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,6 +22,9 @@ public class AnswerController {
     private QuestionService questionService;
     @Autowired
     private AnswerService answerService;
+    @Autowired
+    private UserService userService;
+
 
     @PostMapping("/create/{id}")
     public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult){
@@ -30,7 +35,9 @@ public class AnswerController {
             model.addAttribute("question", question);
             return "question_detail"; //주소는 그대로 인데 이파일을 실행한다는 의미이다,
         }
-        answerService.create(question, answerForm.getContent());
+        SiteUser author = userService.getUser(2); // 임시
+
+        answerService.create(question, answerForm.getContent(), author);
         return "redirect:/question/detail/%d".formatted(id);
     }
 
