@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.validation.Valid;
+import java.security.Principal;
 
 @RequestMapping("/answer")
 @Controller
@@ -27,15 +28,17 @@ public class AnswerController {
 
 
     @PostMapping("/create/{id}")
-    public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult){
+    public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult, Principal principal){
 
         Question question = questionService.getQuestion(id);
+
         //만약에 들어온 데이터에 문제가 생겼다면
         if(bindingResult.hasErrors()){
             model.addAttribute("question", question);
             return "question_detail"; //주소는 그대로 인데 이파일을 실행한다는 의미이다,
         }
-        SiteUser author = userService.getUser(2); // 임시
+//        SiteUser author = userService.getUser(2); // 임시로 사용했던 것을 pricipal을 통해 사용자를 받아온다
+        SiteUser author = userService.getUser(principal.getName());
 
         answerService.create(question, answerForm.getContent(), author);
         return "redirect:/question/detail/%d".formatted(id);

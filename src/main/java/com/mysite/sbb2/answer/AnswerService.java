@@ -19,6 +19,7 @@ public class AnswerService {
         answer.setQuestion(question);
         answer.setContent(content);
         answer.setAuthor(author);
+        answer.setAuthor(author);
 
         answerRepository.save(answer);
     }
