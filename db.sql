@@ -63,3 +63,12 @@ SET author_id = 1;
 # 답변 테이블에 site_user_id 칼럼 추가
 ALTER TABLE answer
 ADD COLUMN author_id BIGINT UNSIGNED NOT NULL;
+
+
+# 질문 테이블에 modify_date 칼럼 추가
+ALTER TABLE question
+ADD COLUMN modify_date DATETIME AFTER create_date;
+
+# 답변 테이블에 modify_date 칼럼 추가
+ALTER TABLE answer
+ADD COLUMN modify_date DATETIME AFTER create_date;
