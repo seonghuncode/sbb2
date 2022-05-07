@@ -5,6 +5,7 @@ import com.mysite.sbb2.user.SiteUser;
 import com.mysite.sbb2.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -41,11 +42,13 @@ public class QuestionConreoller {
     }
 
     @GetMapping("/create")
+    @PreAuthorize("isAuthenticated()")
     public String questionCreate(QuestionForm questionForm) {
         return "question_form";
     }
 
     @PostMapping("/create")
+    @PreAuthorize("isAuthenticated()")
     public String questionCreate(@Valid QuestionForm questionForm, BindingResult bindingResult, Principal principal) {
         if (bindingResult.hasErrors()) {
             return "question_form";

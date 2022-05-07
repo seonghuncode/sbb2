@@ -5,6 +5,7 @@ import com.mysite.sbb2.question.QuestionService;
 import com.mysite.sbb2.user.SiteUser;
 import com.mysite.sbb2.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,7 @@ public class AnswerController {
 
 
     @PostMapping("/create/{id}")
+    @PreAuthorize("isAuthenticated()")  //로그인을 하지 않으면 기능을 사용할 수 없도록
     public String createAnswer(Model model, @PathVariable("id") Integer id, @Valid AnswerForm answerForm, BindingResult bindingResult, Principal principal){
 
         Question question = questionService.getQuestion(id);
