@@ -8,12 +8,12 @@
          (질문을 등록할때 action이랑 질문을 수정할때 action 두가지로 사용한다)-->
         <div th:replace="form_errors::formErrorsFragment"></div>
         <div class="mb-3">
-            <label class="form-label">제목</label>
+            <label for="subject" class="form-label">제목</label>
             <input th:field="*{subject}" type="text" name="subject" class="form-control">
             <!--th:field="*{content}" ==> 위에서 th:object를 사용했기에 생략하여 사용한것이다 == ${questionForm.subject}와 같은 의미를 한다.-->
         </div>
         <div class="mb-3">
-            <label class="form-label">내용</label>
+            <label for="content" class="form-label">내용</label>  <!-- for을 사용하여 content만 눌러도 입력창에 커서가 생기는 기능 -->
             <textarea th:field="*{content}"  name="content" class="form-control" rows="10"></textarea>
         </div>
         <input type="submit" value="저장하기" class="btn btn-primary my-2">
