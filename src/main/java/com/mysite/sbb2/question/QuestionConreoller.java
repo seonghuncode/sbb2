@@ -26,9 +26,10 @@ public class QuestionConreoller {
     private UserService userService;
 
     @RequestMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page) {
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "1") int page,  @RequestParam(value = "kw", defaultValue = "") String kw) {
         page--;
-        Page<Question> paging = questionService.getList(page);
+        Page<Question> paging = questionService.getList(page, kw);
+        model.addAttribute("kw", kw);
         model.addAttribute("paging", paging);
 
         return "question_list";
