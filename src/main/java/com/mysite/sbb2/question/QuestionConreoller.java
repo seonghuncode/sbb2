@@ -109,6 +109,18 @@ public class QuestionConreoller {
     }
 
 
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String questionVote(Principal principal, @PathVariable("id") int id) {
+        Question question = questionService.getQuestion(id);
+        SiteUser siteUser = userService.getUser(principal.getName());
+
+        questionService.vote(question, siteUser);
+
+        return String.format("redirect:/question/detail/%s", id);
+    }
+
+
 
 
 }

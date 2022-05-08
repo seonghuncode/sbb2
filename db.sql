@@ -72,3 +72,21 @@ ADD COLUMN modify_date DATETIME AFTER create_date;
 # 답변 테이블에 modify_date 칼럼 추가
 ALTER TABLE answer
 ADD COLUMN modify_date DATETIME AFTER create_date;
+
+
+
+# 질문 추천자(추천내역)
+CREATE TABLE question_voter (
+  id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  question_id BIGINT UNSIGNED NOT NULL,
+  voter_id BIGINT UNSIGNED NOT NULL
+);
+
+# 답변 추천자(추천내역)
+CREATE TABLE answer_voter (
+  id BIGINT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  answer_id BIGINT UNSIGNED NOT NULL,
+  voter_id BIGINT UNSIGNED NOT NULL
+);
+
+
